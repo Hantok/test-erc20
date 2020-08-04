@@ -1,0 +1,14 @@
+{
+  "contracts": {},
+  "solidityLibs": {},
+  "proxies": {
+    "art/KUKKUS": [
+      {
+        "address": "0x356E55ae6D63781008502EDEDF693A2cc8Ef3D9A",
+        "kind": "NonProxy",
+        "bytecodeHash": "f9ec8ed8384009ad4a2f41a46bfc6c19b406f7694565662bdaac01e5a0593d3a"
+      }
+    ]
+  },
+  "manifestVersion": "2.2"
+}

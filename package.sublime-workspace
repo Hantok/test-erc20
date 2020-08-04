@@ -1,0 +1,238 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"soli",
+				"Set Syntax: Solidity"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"solid",
+				"Set Syntax: Solidity"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"cashberry.com.ua/"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/roman/dev/rundax/erc20/art/build/contracts/INDEX.json",
+		"/Users/roman/dev/rundax/erc20/art/.openzeppelin/project.json",
+		"/Users/roman/dev/rundax/erc20/art/.openzeppelin/dev-1591799972920.json",
+		"/Users/roman/dev/rundax/erc20/art/.gitignore",
+		"/Users/roman/dev/rundax/erc20/access-control/Auth.sol",
+		"/Users/roman/dev/rundax/erc20/contracts/Box.sol",
+		"/Users/roman/dev/rundax/ethereum/contracts/Box.sol",
+		"/Users/roman/dev/rundax/ethereum/.gitignore",
+		"/Users/roman/dev/rundax/bitsong/Bitsong Rundax wallet",
+		"/Users/roman/dev/minter/instruction.txt",
+		"/Users/roman/Downloads/falcon.csv",
+		"/Users/roman/dev/genesis.json",
+		"/Users/roman/dev/rundax/bitsong/autodelegate-systemctl.txt",
+		"/Users/roman/dev/minter/pub-priv-validator-keys.json",
+		"/Users/roman/dev/minter/StakeDedender instruction",
+		"/Users/roman/dev/minter/addrbook.json_private-sentry",
+		"/etc/hosts",
+		"/Users/roman/dev/optimize_jpegs.pl",
+		"/Users/roman/Downloads/temp.html",
+		"/Users/roman/Downloads/showcase.hbs",
+		"/Users/roman/Downloads/Telegram Desktop/Presentation.txt",
+		"/Users/roman/Google Drive/Rundax/Minter/Add_logo_to_validators_statistic_instuction.txt",
+		"/Users/roman/dev/pitchlab/doc_info.txt",
+		"/Users/roman/Downloads/CrackNew Files(02.05-2O19) [JIBEF] Crack/#Pass.word.txt",
+		"/Users/roman/dev/pitchlab/yappi-ios/.gitignore",
+		"/Users/roman/dev/pitchlab/yappi-ios/.swiftlint.yml",
+		"/Users/roman/Dropbox/Documents/Charles_Proxy_key.txt",
+		"/Users/roman/dev/Sadhana/Cartfile",
+		"/Users/roman/dev/pitchlab/bloom-ios/Podfile",
+		"/Users/roman/Dropbox/Documents/ФОП/аваль/Реквізити_аваль.txt",
+		"/Users/roman/Dropbox/Documents/ФОП/аваль/info.txt",
+		"/Users/roman/Dropbox/Documents/ФОП/Ключі/password",
+		"/Users/roman/dev/Sadhana/.gitignore",
+		"/Users/roman/dev/Sadhana/Podfile",
+		"/Users/roman/dev/pitchlab/PLPinViewController/Example/Podfile",
+		"/Users/roman/Downloads/Telegram Desktop/report_sended_opened.csv",
+		"/Users/roman/Downloads/Telegram Desktop/report_sended_opened_1.csv",
+		"/Users/roman/dev/pitchlab/yappi-ios/Podfile",
+		"/Users/roman/Downloads/logo.svg",
+		"/Users/roman/Google Drive/Rundax/Minter/Add logo to validators statistic instuction",
+		"/Users/roman/Google Drive/Rundax/Minter/invites.csv",
+		"/Users/roman/dev/minter/node-update-script.sh",
+		"/Users/roman/dev/minter/minter_0.2.4.json",
+		"/Users/roman/dev/minter/0.5.0",
+		"/Users/roman/Downloads/order-11020-2FT4179.txt",
+		"/Users/roman/Downloads/list.svg",
+		"/Users/roman/Downloads/mxMiner_0.17a/Windows X64/start_mining - opencl + cpu.bat",
+		"/Users/roman/Downloads/mxMiner_0.17a/Windows X64/start_mining - cuda + cpu.bat",
+		"/Users/roman/Downloads/mxMiner_0.17a/Windows X64/respawnMiner.bat",
+		"/Users/roman/Downloads/mxMiner_0.17a/Windows X64/start_mining.bat",
+		"/Users/roman/Downloads/if_icon-27-one-finger-click_315298.svg",
+		"/Users/roman/Dropbox/miner.html"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "package.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 197.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
