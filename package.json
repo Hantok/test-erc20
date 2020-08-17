@@ -9,6 +9,7 @@
   "author": "Roman Slysh",
   "license": "ISC",
   "dependencies": {
+    "@openzeppelin/upgrades": "^2.8.0",
     "openzeppelin-solidity": "^3.0.2"
   },
   "devDependencies": {
