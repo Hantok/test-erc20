@@ -1,10 +1,10 @@
 {
   "manifestVersion": "2.2",
   "contracts": {
-    "MARIA": "MARIA"
+    "KUKKUS": "KUKKUS"
   },
   "dependencies": {},
-  "name": "art",
+  "name": "Aloha",
   "version": "1.0.0",
   "compiler": {
     "compilerSettings": {
@@ -17,7 +17,7 @@
       "enabled": false
     },
     "manager": "openzeppelin",
-    "solcVersion": "0.6.9",
+    "solcVersion": "0.6.12",
     "artifactsDir": "build/contracts",
     "contractsDir": "contracts"
   },
