@@ -2,7 +2,7 @@
   "contracts": {},
   "solidityLibs": {},
   "proxies": {
-    "art/KUKKUS": [
+    "Aloha/KUKKUS": [
       {
         "address": "0x356E55ae6D63781008502EDEDF693A2cc8Ef3D9A",
         "kind": "NonProxy",
@@ -14,22 +14,30 @@
         "address": "0xb2d07CD597bd77C3a71DfEEd8b9856772D5CdD0e",
         "kind": "NonProxy",
         "bytecodeHash": "cf48e3869cbda4530d6b26cf495afd016d87879d4eb716828302bab1d28f72a5"
-      },
+      }
+    ],
+    "Aloha/Maria": [
       {
         "address": "0x5B782CD770799d98543D52Bb4F1bde66711D02E8",
         "kind": "NonProxy",
         "bytecodeHash": "cf48e3869cbda4530d6b26cf495afd016d87879d4eb716828302bab1d28f72a5"
-      },
+      }
+    ],
+    "Aloha/Madonna del Passeggio": [
       {
         "address": "0xF9180d24Fc5ba56d94997c8a846737B7e94e69e8",
         "kind": "NonProxy",
         "bytecodeHash": "cf48e3869cbda4530d6b26cf495afd016d87879d4eb716828302bab1d28f72a5"
-      },
+      }
+    ],
+    "Aloha/Jesus": [
       {
         "address": "0x3FB0de82B5CcA457C238ffDD74ce4F2d7ecaCfb9",
         "kind": "NonProxy",
         "bytecodeHash": "cf48e3869cbda4530d6b26cf495afd016d87879d4eb716828302bab1d28f72a5"
-      },
+      }
+    ],
+    "Aloha/Ann Carr": [
       {
         "address": "0x6ea974901387fa361F2a4bf681b0E58056DCF9aB",
         "kind": "NonProxy",
