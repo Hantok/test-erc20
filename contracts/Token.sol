@@ -21,7 +21,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20Pausable.sol";
  * roles, as well as the default admin role, which will let it grant both minter
  * and pauser roles to other accounts.
  */
-contract Index is Context, AccessControl, ERC20Pausable {
+contract Token is Context, AccessControl, ERC20Pausable {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
@@ -34,7 +34,11 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * Default amount 100000000000000000000000 (100 000)
      *
      */
-    constructor(string memory name, string memory symbol, uint256 amount) public ERC20(name, symbol) {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 amount
+    ) public ERC20(name, symbol) {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
 
         _setupRole(MINTER_ROLE, _msgSender());
@@ -53,7 +57,10 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to mint");
+        require(
+            hasRole(MINTER_ROLE, _msgSender()),
+            "Index: must have minter role to mint"
+        );
         _mint(_msgSender(), amount);
     }
 
@@ -67,7 +74,10 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `MINTER_ROLE`.
      */
     function burn(uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to burn");
+        require(
+            hasRole(MINTER_ROLE, _msgSender()),
+            "Index: must have minter role to burn"
+        );
         _burn(_msgSender(), amount);
     }
 
@@ -81,7 +91,10 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Index: must have pauser role to pause");
+        require(
+            hasRole(PAUSER_ROLE, _msgSender()),
+            "Index: must have pauser role to pause"
+        );
         _pause();
     }
 
@@ -95,11 +108,18 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Index: must have pauser role to unpause");
+        require(
+            hasRole(PAUSER_ROLE, _msgSender()),
+            "Index: must have pauser role to unpause"
+        );
         _unpause();
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20Pausable) {
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override(ERC20Pausable) {
         super._beforeTokenTransfer(from, to, amount);
     }
 }
