@@ -49,9 +49,9 @@ contract Index is Context, AccessControl, ERC20Pausable {
      *
      * - the caller must have the `MINTER_ROLE`.
      */
-    function mint(address to, uint256 amount) public virtual {
+    function mint(uint256 amount) public virtual {
         require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to mint");
-        _mint(to, amount);
+        _mint(_msgSender(), amount);
     }
 
     /**
@@ -63,9 +63,9 @@ contract Index is Context, AccessControl, ERC20Pausable {
      *
      * - the caller must have the `MINTER_ROLE`.
      */
-    function burn(address from, uint256 amount) public virtual {
+    function burn(uint256 amount) public virtual {
         require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to burn");
-        _burn(from, amount);
+        _burn(_msgSender(), amount);
     }
 
     /**
