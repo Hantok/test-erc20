@@ -30,6 +30,9 @@ contract Index is Context, AccessControl, ERC20Pausable {
      * account that deploys the contract.
      *
      * See {ERC20-constructor}.
+     *
+     * Default amount 100000000000000000000000 (100 000)
+     *
      */
     constructor(string memory name, string memory symbol, uint256 amount) public ERC20(name, symbol) {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
