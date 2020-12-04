@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.6.12;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/GSN/Context.sol";
@@ -21,7 +21,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20Pausable.sol";
  * roles, as well as the default admin role, which will let it grant both minter
  * and pauser roles to other accounts.
  */
-contract Index is Context, AccessControl, ERC20Pausable {
+contract Token is Context, AccessControl, ERC20Pausable {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
@@ -52,7 +52,7 @@ contract Index is Context, AccessControl, ERC20Pausable {
      *
      * - the caller must have the `MINTER_ROLE`.
      */
-    function mint(uint256 amount) public virtual {
+    function mint(address to, uint256 amount) public virtual {
         require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to mint");
         _mint(_msgSender(), amount);
     }
@@ -97,6 +97,19 @@ contract Index is Context, AccessControl, ERC20Pausable {
     function unpause() public virtual {
         require(hasRole(PAUSER_ROLE, _msgSender()), "Index: must have pauser role to unpause");
         _unpause();
+    }
+
+    /**
+     * @dev set Admin Role .
+     *
+     * See {AccessControl}.
+     *
+     * Requirements:
+     *
+     * - the caller must have the `ADMIN_ROLE`.
+     */
+    function setRoleAdmin(bytes32 roleId, bytes32 adminRoleId) public {
+        _setRoleAdmin(roleId, adminRoleId);
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20Pausable) {

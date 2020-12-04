@@ -53,3 +53,9 @@ allFiredEvents
 
 secrets.json
 .openzeppelin/.session
+
+node_modules
+
+#Hardhat files
+cache
+artifacts
