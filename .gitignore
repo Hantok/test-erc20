@@ -54,6 +54,9 @@ allFiredEvents
 secrets.json
 .openzeppelin/.session
 
+# OpenZeppelin
+.openzeppelin/unknown-*.json
+
 node_modules
 
 #Hardhat files

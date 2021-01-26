@@ -1,28 +1,28 @@
 # Aloha ERC20 smart contract
 
-Install ganache-cli and open zeppelin
-
-    $ npm install -g ganache-cli
-    $ npm install @openzeppelin/cli
-
-Prepere the project
+Install
 
     $ npm install
-    
-In separete window run ganache devnet
 
-    $ ganache-cli -d   
+    
+In separete window run hardhat node
+
+    $ npx hardhat node
     
 Compile smart contract
 
-    $ npx oz complile
+    $ npx hardhat compile
     
 Deploy smart contract
 
-    $ npx oz deploy
-    
+    $ npx hardhat run scripts/deploy.js --network localhost --show-stack-traces
+
 Test smart contract 
 
     $ npm test
+
+Or
+
+    $ npx hardhat test 
     
 Open Zeppelin docs: https://docs.openzeppelin.com/openzeppelin/
