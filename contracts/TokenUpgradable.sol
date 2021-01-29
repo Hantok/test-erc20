@@ -37,13 +37,13 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      * See {ERC20-constructor}.
      */
     function __ERC20PresetMinterPauser_init(string memory name, string memory symbol) internal initializer {
-        __ERC20PresetMinterPauser_init_unchained(name, symbol);
         __Context_init_unchained();
         __AccessControl_init_unchained();
         __ERC20_init_unchained(name, symbol);
         __ERC20Burnable_init_unchained();
         __Pausable_init_unchained();
         __ERC20Pausable_init_unchained();
+        __ERC20PresetMinterPauser_init_unchained(name, symbol);
     }
 
     function __ERC20PresetMinterPauser_init_unchained(string memory name, string memory symbol) internal initializer {

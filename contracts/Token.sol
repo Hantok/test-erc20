@@ -53,8 +53,8 @@ contract Token is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(address to, uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to mint");
-        _mint(_msgSender(), amount);
+        require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to mint");
+        _mint(to, amount);
     }
 
     /**
@@ -67,7 +67,7 @@ contract Token is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `MINTER_ROLE`.
      */
     function burn(uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Index: must have minter role to burn");
+        require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to burn");
         _burn(_msgSender(), amount);
     }
 
@@ -81,7 +81,7 @@ contract Token is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Index: must have pauser role to pause");
+        require(hasRole(PAUSER_ROLE, _msgSender()), "Token: must have pauser role to pause");
         _pause();
     }
 
@@ -95,7 +95,7 @@ contract Token is Context, AccessControl, ERC20Pausable {
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Index: must have pauser role to unpause");
+        require(hasRole(PAUSER_ROLE, _msgSender()), "Token: must have pauser role to unpause");
         _unpause();
     }
 

@@ -1,6 +1,5 @@
-// TODO - Need to fix tests
+// Reference https://github.com/OpenZeppelin/openzeppelin-contracts/blob/f06738828ba6d3707b12a03e98e0f92ee97437f9/test/token/ERC20/ERC20.test.js
 
-const { accounts, contract } = require('@openzeppelin/test-environment');
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const { ZERO_ADDRESS } = constants;
@@ -9,18 +8,18 @@ const {
   shouldBehaveLikeERC20,
   shouldBehaveLikeERC20Transfer,
   shouldBehaveLikeERC20Approve,
-} = require('./ERC20.behavior');
+} = require('./TokenERC20.behavior');
 
-const ERC20Mock = contract.fromArtifact('Token');
-const ERC20DecimalsMock = contract.fromArtifact('ERC20DecimalsMock');
+const ERC20Mock = artifacts.require('Token');
+const ERC20DecimalsMock = artifacts.require('ERC20DecimalsMock');
 
-describe('ERC20', function () {
+contract('Token ERC20', function (accounts) {
   const [ initialHolder, recipient, anotherAccount ] = accounts;
 
   const name = 'My Token';
   const symbol = 'MTKN';
 
-  const initialSupply = new BN(100000);
+  const initialSupply = new BN(100);
 
   beforeEach(async function () {
     this.token = await ERC20Mock.new(name, symbol, initialSupply, { from: initialHolder });
@@ -57,7 +56,7 @@ describe('ERC20', function () {
         describe('when there was no approved amount before', function () {
           it('reverts', async function () {
             await expectRevert(this.token.decreaseAllowance(
-              spender, amount, { from: initialHolder }), 'ERC20: decreased allowance below zero'
+              spender, amount, { from: initialHolder }), 'ERC20: decreased allowance below zero',
             );
           });
         });
@@ -93,7 +92,7 @@ describe('ERC20', function () {
           it('reverts when more than the full allowance is removed', async function () {
             await expectRevert(
               this.token.decreaseAllowance(spender, approvedAmount.addn(1), { from: initialHolder }),
-              'ERC20: decreased allowance below zero'
+              'ERC20: decreased allowance below zero',
             );
           });
         });
@@ -118,7 +117,7 @@ describe('ERC20', function () {
 
       it('reverts', async function () {
         await expectRevert(this.token.decreaseAllowance(
-          spender, amount, { from: initialHolder }), 'ERC20: decreased allowance below zero'
+          spender, amount, { from: initialHolder }), 'ERC20: decreased allowance below zero',
         );
       });
     });
@@ -202,18 +201,17 @@ describe('ERC20', function () {
 
       it('reverts', async function () {
         await expectRevert(
-          this.token.increaseAllowance(spender, amount, { from: initialHolder }), 'ERC20: approve to the zero address'
+          this.token.increaseAllowance(spender, amount, { from: initialHolder }), 'ERC20: approve to the zero address',
         );
       });
     });
   });
 
-  // TODO - need fix
   describe('_mint', function () {
     const amount = new BN(50);
     it('rejects a null account', async function () {
       await expectRevert(
-        this.token.mint(ZERO_ADDRESS, amount), 'ERC20: mint to the zero address'
+        this.token.mint(ZERO_ADDRESS, amount), 'ERC20: mint to the zero address',
       );
     });
 
@@ -243,24 +241,17 @@ describe('ERC20', function () {
     });
   });
 
-  // TODO - need fix
   describe('_burn', function () {
-    it('rejects a null account', async function () {
-      await expectRevert(this.token.burn(ZERO_ADDRESS, new BN(1)),
-        'ERC20: burn from the zero address');
-    });
-
     describe('for a non zero account', function () {
       it('rejects burning more than balance', async function () {
-        await expectRevert(this.token.burn(
-          initialHolder, initialSupply.addn(1)), 'ERC20: burn amount exceeds balance'
+        await expectRevert(this.token.burn(initialSupply.addn(1)), 'ERC20: burn amount exceeds balance',
         );
       });
 
       const describeBurn = function (description, amount) {
         describe(description, function () {
           beforeEach('burning', async function () {
-            const { logs } = await this.token.burn(initialHolder, amount);
+            const { logs } = await this.token.burn(amount);
             this.logs = logs;
           });
 
@@ -290,33 +281,15 @@ describe('ERC20', function () {
     });
   });
 
-  // TODO - need fix
   describe('_transfer', function () {
     shouldBehaveLikeERC20Transfer('ERC20', initialHolder, recipient, initialSupply, function (from, to, amount) {
-      return this.token.transferInternal(from, to, amount);
-    });
-
-    describe('when the sender is the zero address', function () {
-      it('reverts', async function () {
-        await expectRevert(this.token.transferInternal(ZERO_ADDRESS, recipient, initialSupply),
-          'ERC20: transfer from the zero address'
-        );
-      });
+      return this.token.transfer(to, amount);
     });
   });
 
-  // TODO - need fix
   describe('_approve', function () {
     shouldBehaveLikeERC20Approve('ERC20', initialHolder, recipient, initialSupply, function (owner, spender, amount) {
-      return this.token.approveInternal(owner, spender, amount);
-    });
-
-    describe('when the owner is the zero address', function () {
-      it('reverts', async function () {
-        await expectRevert(this.token.approveInternal(ZERO_ADDRESS, recipient, initialSupply),
-          'ERC20: approve from the zero address'
-        );
-      });
+      return this.token.approve(spender, amount);
     });
   });
 });

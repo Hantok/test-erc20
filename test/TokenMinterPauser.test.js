@@ -1,17 +1,17 @@
-// TODO - Need to fix tests
-const { accounts, contract, web3 } = require('@openzeppelin/test-environment');
+// Reference https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/test/presets/ERC20PresetMinterPauser.test.js
+
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const { ZERO_ADDRESS } = constants;
 
 const { expect } = require('chai');
 
-const ERC20PresetMinterPauser = contract.fromArtifact('TokenUpgradable');
+const ERC20PresetMinterPauser = artifacts.require('Token');
 
-describe('ERC20PresetMinterPauser', function () {
+contract('Token MinterPauser Test', function (accounts) {
   const [ deployer, other ] = accounts;
 
   const name = 'MinterPauserToken';
-  const symbol = 'DRT';
+  const symbol = 'MPT';
 
   const amount = new BN('5000');
 
@@ -20,7 +20,7 @@ describe('ERC20PresetMinterPauser', function () {
   const PAUSER_ROLE = web3.utils.soliditySha3('PAUSER_ROLE');
 
   beforeEach(async function () {
-    this.token = await ERC20PresetMinterPauser.new(name, symbol, { from: deployer });
+    this.token = await ERC20PresetMinterPauser.new(name, symbol, amount, { from: deployer });
   });
 
   it('deployer has the default admin role', async function () {
@@ -54,7 +54,7 @@ describe('ERC20PresetMinterPauser', function () {
     it('other accounts cannot mint tokens', async function () {
       await expectRevert(
         this.token.mint(other, amount, { from: other }),
-        'ERC20PresetMinterPauser: must have minter role to mint',
+        'Token: must have minter role to mint',
       );
     });
   });
@@ -86,18 +86,25 @@ describe('ERC20PresetMinterPauser', function () {
     });
 
     it('other accounts cannot pause', async function () {
-      await expectRevert(this.token.pause({ from: other }), 'ERC20PresetMinterPauser: must have pauser role to pause');
+      await expectRevert(this.token.pause({ from: other }), 'Token: must have pauser role to pause');
     });
   });
 
   describe('burning', function () {
-    it('holders can burn their tokens', async function () {
+    it('deployer can burn own tokens', async function () {
+      const receipt = await this.token.burn(amount.subn(1), { from: deployer });
+      expectEvent(receipt, 'Transfer', { from: deployer, to: ZERO_ADDRESS, value: amount.subn(1) });
+
+      expect(await this.token.balanceOf(deployer)).to.be.bignumber.equal('1');
+    });
+
+    it('other accounts can burn own tokens', async function () {
       await this.token.mint(other, amount, { from: deployer });
 
-      const receipt = await this.token.burn(amount.subn(1), { from: other });
-      expectEvent(receipt, 'Transfer', { from: other, to: ZERO_ADDRESS, value: amount.subn(1) });
-
-      expect(await this.token.balanceOf(other)).to.be.bignumber.equal('1');
+      await expectRevert(
+        this.token.burn(amount, { from: other }),
+        'Token: must have minter role to burn',
+      );
     });
   });
 });
