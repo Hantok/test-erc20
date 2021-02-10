@@ -98,7 +98,7 @@ contract('Token MinterPauser Test', function (accounts) {
       expect(await this.token.balanceOf(deployer)).to.be.bignumber.equal('1');
     });
 
-    it('other accounts can burn own tokens', async function () {
+    it('other accounts can not burn own tokens', async function () {
       await this.token.mint(other, amount, { from: deployer });
 
       await expectRevert(
