@@ -5,7 +5,7 @@ const { ZERO_ADDRESS } = constants;
 function shouldBehaveLikeERC20 (errorPrefix, initialSupply, initialHolder, recipient, anotherAccount) {
   describe('total supply', function () {
     it('returns the total amount of tokens', async function () {
-      expect(await this.token.totalSupply()).to.be.bignumber.equal(initialSupply);
+      expect(await this.token.totalSupply()).to.equal(initialSupply);
     });
   });
 

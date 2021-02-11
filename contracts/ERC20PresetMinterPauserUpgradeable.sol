@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/GSN/ContextUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20BurnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 
 /**
  * @dev {ERC20} token, including:
  *
- *  - a minter role that allows for token burning (destroy)
+ *  - ability for holders to burn (destroy) their tokens
  *  - a minter role that allows for token minting (creation)
  *  - a pauser role that allows to stop all token transfers
  *
@@ -22,7 +23,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
  * roles, as well as the default admin role, which will let it grant both minter
  * and pauser roles to other accounts.
  */
-contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgradeable, ERC20Upgradeable, ERC20PausableUpgradeable {
+contract ERC20PresetMinterPauserUpgradeable is Initializable, ContextUpgradeable, AccessControlUpgradeable, ERC20BurnableUpgradeable, ERC20PausableUpgradeable {
     function initialize(string memory name, string memory symbol) public virtual initializer {
         __ERC20PresetMinterPauser_init(name, symbol);
     }
@@ -39,6 +40,7 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
         __Context_init_unchained();
         __AccessControl_init_unchained();
         __ERC20_init_unchained(name, symbol);
+        __ERC20Burnable_init_unchained();
         __Pausable_init_unchained();
         __ERC20Pausable_init_unchained();
         __ERC20PresetMinterPauser_init_unchained(name, symbol);
@@ -61,23 +63,8 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(address to, uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to mint");
+        require(hasRole(MINTER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have minter role to mint");
         _mint(to, amount);
-    }
-
-    /**
-     * @dev Destroys `amount` tokens from `account`, reducing the
-     * total supply.
-     *
-     * See {ERC20-_burn}.
-     *
-     * Requirements:
-     *
-     * - the caller must have the `MINTER_ROLE`.
-     */
-    function burn(address account, uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to burn");
-        _burn(account, amount);
     }
 
     /**
@@ -90,7 +77,7 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Token: must have pauser role to pause");
+        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to pause");
         _pause();
     }
 
@@ -104,7 +91,7 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "Token: must have pauser role to unpause");
+        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to unpause");
         _unpause();
     }
 
