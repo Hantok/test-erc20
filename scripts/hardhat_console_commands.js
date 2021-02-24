@@ -27,14 +27,14 @@ await token.unBlacklist("0x70997970C51812dc3A010C7d01b50e0d17dc79C8")
 await token.isBlacklisted("0x70997970C51812dc3A010C7d01b50e0d17dc79C8")
 
 
-await token.mint(accounts[0], "100000000000000000000")
-await token.burn(accounts[0], "100000000000000000000")
+await token.mint(accounts[1], "100000000000000000000")
+await token.burn("100000000000000000000")
 
 await token.balanceOf(accounts[0])
 await token.balanceOf(accounts[1])
 
 await token.transfer(accounts[1], "1")
-await token.transfer(accounts[1], "1")
+await token.transfer(accounts[0], "1")
 
 
 await token.pause()
@@ -44,8 +44,8 @@ await token.unpause()
 await token.paused()
 
 
-await token.grantRole(web3.utils.soliditySha3('MINTER_ROLE'), "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
-await token.grantRole(web3.utils.soliditySha3('PAUSER_ROLE'), "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+await token.grantRole(web3.utils.soliditySha3('MINTER_ROLE'), "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
+await token.grantRole(web3.utils.soliditySha3('PAUSER_ROLE'), "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
 
-await token.revokeRole(web3.utils.soliditySha3('MINTER_ROLE'), "0xF119492cC512894cA2B7Df5E16E846fDd8eEf620")
-await token.revokeRole(web3.utils.soliditySha3('PAUSER_ROLE'), "0xF119492cC512894cA2B7Df5E16E846fDd8eEf620")
+await token.revokeRole(web3.utils.soliditySha3('MINTER_ROLE'), "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
+await token.revokeRole(web3.utils.soliditySha3('PAUSER_ROLE'), "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
