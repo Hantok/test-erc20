@@ -1,5 +1,9 @@
 # Aloha ERC20 smart contract
 
+**Requires node v12.***
+
+**Requires npm 6.14.***
+
 Install
 
     $ npm install
