@@ -1,14 +1,21 @@
 //Commands for hardhat console
 accounts = await ethers.provider.listAccounts()
 
-const Token = await ethers.getContractFactory("TokenUpgradable")
+const Token = await ethers.getContractFactory("TokenUpgradeable")
+
+// localhost
 const token = await Token.attach("0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0")
+
+// https://testnet.bscscan.com/
+const token = await Token.attach("0x6Df183f145F0bDfd676227a3107653100592c1b8")
+
 await token.name()
 await token.totalSupply()
+await token.decimals()
 
-await token.blacklist(accounts[0])
-await token.isBlacklisted(accounts[0])
-await token.unBlacklist(accounts[0])
+await token.blacklist(accounts[1])
+await token.isBlacklisted(accounts[1])
+await token.unBlacklist(accounts[1])
 
 await token.blacklist("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
 await token.isBlacklisted("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")

@@ -2,6 +2,7 @@
 
 import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/GSN/ContextUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 pragma solidity >=0.6.0 <0.8.0;
 
@@ -57,11 +58,6 @@ abstract contract Blacklistable is Initializable, ContextUpgradeable {
     function _unBlacklist(address account) internal virtual {
         blacklisted[account] = false;
         emit UnBlacklisted(account);
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {
-        require(!blacklisted[from], "Blacklistable: sender is blacklisted");
-        require(!blacklisted[to], "Blacklistable: receiver is blacklisted");
     }
     uint256[50] private __gap;
 }

@@ -27,12 +27,18 @@ module.exports = {
             accounts: {mnemonic: mnemonic},
             chainId: 1337
         },
-        bsctestnet: {
-            url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-            accounts: {mnemonic: mnemonic}
-        },
         bsctestnettest: {
-            url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+            url: 'https://data-seed-prebsc-1-s3.binance.org:8545',
+            accounts: {mnemonic: mnemonictest},
+            gas: 19500000
+        },
+        bsctestnet: {
+            url: 'https://data-seed-prebsc-1-s3.binance.org:8545',
+            accounts: {mnemonic: mnemonic},
+            gas: 19500000
+        },
+        bscmainnettest: {
+            url: 'https://bsc-dataseed.binance.org',
             accounts: {mnemonic: mnemonictest},
             gas: 19500000
         }

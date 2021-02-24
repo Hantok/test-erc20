@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/GSN/ContextUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
-import "./Blacklistable.sol";
+import "./ERC20Blacklistable.sol";
 
 /**
  * @dev {ERC20} token, including:
@@ -24,9 +24,10 @@ import "./Blacklistable.sol";
  * roles, as well as the default admin role, which will let it grant both minter
  * and pauser roles to other accounts.
  */
-contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgradeable, ERC20Upgradeable, ERC20PausableUpgradeable, Blacklistable {
-    function initialize(string memory name, string memory symbol) public virtual initializer {
-        __ERC20PresetMinterPauser_init(name, symbol);
+contract TokenUpgradeable is Initializable, ContextUpgradeable, AccessControlUpgradeable, ERC20PausableUpgradeable, ERC20Blacklistable {
+    function initialize(string memory name, string memory symbol, uint256 amount) public virtual initializer {
+        __TokenUpgradeable_init(name, symbol);
+        mint(_msgSender(), amount);
     }
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
@@ -38,13 +39,13 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      *
      * See {ERC20-constructor}.
      */
-    function __ERC20PresetMinterPauser_init(string memory name, string memory symbol) internal initializer {
+    function __TokenUpgradeable_init(string memory name, string memory symbol) internal initializer {
         __Context_init_unchained();
         __AccessControl_init_unchained();
         __ERC20_init_unchained(name, symbol);
         __Pausable_init_unchained();
         __ERC20Pausable_init_unchained();
-        __Blacklistable_init_unchained();
+        __ERC20Blacklistable_init_unchained();
         __ERC20PresetMinterPauser_init_unchained(name, symbol);
     }
 
@@ -67,6 +68,7 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      */
     function mint(address to, uint256 amount) public virtual {
         require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to mint");
+        require(!isBlacklisted(_msgSender()), "Token: minter is blacklisted");
         _mint(to, amount);
     }
 
@@ -80,9 +82,10 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
      *
      * - the caller must have the `MINTER_ROLE`.
      */
-    function burn(address account, uint256 amount) public virtual {
+    function burn(uint256 amount) public virtual {
         require(hasRole(MINTER_ROLE, _msgSender()), "Token: must have minter role to burn");
-        _burn(account, amount);
+        require(!isBlacklisted(_msgSender()), "Token: burner is blacklisted");
+        _burn(_msgSender(), amount);
     }
 
     /**
@@ -137,7 +140,7 @@ contract TokenUpgradable is Initializable, ContextUpgradeable, AccessControlUpgr
         _unBlacklist(account);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20Upgradeable, ERC20PausableUpgradeable, Blacklistable) {
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20Blacklistable, ERC20PausableUpgradeable) {
         super._beforeTokenTransfer(from, to, amount);
     }
     uint256[50] private __gap;

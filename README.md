@@ -27,7 +27,7 @@ Deploy smart contract
 
 Deploy upgradable smart contract
 
-    $ npx hardhat run --network localhost scripts/deployUpgradable.js
+    $ npx hardhat run --network localhost scripts/deployUpgradeable.js
 
 Run hardhat localhost console
 
