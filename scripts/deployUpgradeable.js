@@ -3,7 +3,8 @@ const { ethers, upgrades } = require("hardhat");
 async function main() {
     const Token = await ethers.getContractFactory("TokenUpgradeable");
     console.log("Deploying upgradable token...");
-    const token = await upgrades.deployProxy(Token, ["ERC20 Token", "ERC20UP"], { initializer: 'initialize', unsafeAllowCustomTypes: true });
+    const amount = '100000000000000000000000'; // 100 000
+    const token = await upgrades.deployProxy(Token, ["ERC20 Token", "ERC20UP", amount], { initializer: 'initialize', unsafeAllowCustomTypes: true });
     console.log("Upgradable token deployed to:", token.address);
 }
 
