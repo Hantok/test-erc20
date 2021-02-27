@@ -3,7 +3,7 @@ const { ZERO_ADDRESS } = constants;
 
 const { expect } = require('chai');
 
-const ERC20PausableMock = artifacts.require('TokenUpgradeableWithInit');
+const ERC20PausableMock = artifacts.require('TokenUpgradeable');
 
 contract('ERC20Blacklistable', function (accounts) {
     const [ holder, recipient, anotherAccount ] = accounts;
@@ -14,7 +14,8 @@ contract('ERC20Blacklistable', function (accounts) {
     const symbol = 'MTKN';
 
     beforeEach(async function () {
-        this.token = await ERC20PausableMock.new(name, symbol, initialSupply, {from: holder});
+        this.token = await ERC20PausableMock.new();
+        await this.token.initialize(name, symbol, initialSupply, {from: holder});
     });
 
     describe('blacklistable token', function () {

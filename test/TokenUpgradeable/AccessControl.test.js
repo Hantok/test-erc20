@@ -2,7 +2,7 @@ const { BN, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 
 const { expect } = require('chai');
 
-const AccessControlMock = artifacts.require('ERC20PresetMinterPauserUpgradeableWithInit');
+const AccessControlMock = artifacts.require('TokenUpgradeable');
 
 contract('AccessControl', function (accounts) {
   const [ admin, authorized, otherAuthorized, other, otherAdmin ] = accounts;
@@ -17,7 +17,8 @@ contract('AccessControl', function (accounts) {
   const symbol = 'MTKN';
 
   beforeEach(async function () {
-    this.accessControl = await AccessControlMock.new(name, symbol, { from: admin });
+    this.accessControl = await AccessControlMock.new();
+    await this.accessControl.initialize(name, symbol, initialBalance, { from: admin });
   });
 
   describe('default admin', function () {

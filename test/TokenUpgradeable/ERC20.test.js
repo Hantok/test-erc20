@@ -8,8 +8,7 @@ const {
     shouldBehaveLikeERC20Approve,
 } = require('./ERC20.behavior');
 
-const ERC20Mock = artifacts.require('TokenUpgradeableWithInit');
-const ERC20DecimalsMock = artifacts.require('ERC20DecimalsMock');
+const ERC20Mock = artifacts.require('TokenUpgradeableMock');
 
 contract('ERC20', function (accounts) {
     const [ initialHolder, recipient, anotherAccount ] = accounts;
@@ -20,7 +19,8 @@ contract('ERC20', function (accounts) {
     const initialSupply = new BN(100);
 
     beforeEach(async function () {
-        this.token = await ERC20Mock.new(name, symbol, initialSupply, { from: initialHolder });
+        this.token = await ERC20Mock.new(name, symbol, 18);
+        await this.token.initialize(name, symbol, initialSupply, { from: initialHolder });
     });
 
     it('has a name', async function () {
@@ -39,7 +39,7 @@ contract('ERC20', function (accounts) {
         const decimals = new BN(6);
 
         it('can set decimals during construction', async function () {
-            const token = await ERC20DecimalsMock.new(name, symbol, decimals);
+            const token = await ERC20Mock.new(name, symbol, decimals);
             expect(await token.decimals()).to.be.bignumber.equal(decimals);
         });
     });

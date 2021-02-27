@@ -3,7 +3,7 @@ const { ZERO_ADDRESS } = constants;
 
 const { expect } = require('chai');
 
-const Token = artifacts.require('TokenUpgradeableWithInit');
+const Token = artifacts.require('TokenUpgradeable');
 
 contract('ERC20PresetMinterPauser', function (accounts) {
     const [ deployer, other ] = accounts;
@@ -18,7 +18,8 @@ contract('ERC20PresetMinterPauser', function (accounts) {
     const PAUSER_ROLE = web3.utils.soliditySha3('PAUSER_ROLE');
 
     beforeEach(async function () {
-        this.token = await Token.new(name, symbol, amount, { from: deployer });
+        this.token = await Token.new();
+        await this.token.initialize(name, symbol, amount, {from: deployer});
     });
 
     it('deployer has the default admin role', async function () {
