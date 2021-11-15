@@ -1,4 +1,4 @@
-# Aloha ERC20 smart contract
+# ERC20 upgradable smart contract
 
 **Requires node v12.***
 
